@@ -1,28 +1,28 @@
 # **Enfilei**
 
-### Desenvolvido por **Medsis Soluções**
+### Desenvolvido por **Chef Soluções**
 
 ---
 
-## **Sobre a Empresa: Medsis Soluções**
+## **Sobre a Empresa: Chef Soluções**
 
-A **Medsis Soluções** foi fundada em 2015 por um grupo de profissionais da área de tecnologia e saúde, com a missão de otimizar o atendimento nas clínicas médicas e hospitais por meio da inovação tecnológica. Nosso foco é reduzir o tempo de espera dos pacientes e melhorar a eficiência dos processos de gestão de atendimento, garantindo uma experiência mais ágil e satisfatória para os usuários. Desde sua fundação, a Medisys Solutions tem se destacado por fornecer soluções robustas e escaláveis, ajudando clínicas a digitalizarem seus processos e melhorarem sua operação.
+A **Chef Soluções** foi fundada em 2020 com o objetivo de trazer inovação para o setor de alimentação, oferecendo soluções tecnológicas que aprimoram a experiência dos clientes e otimizam o gerenciamento de restaurantes. Nossa missão é ajudar estabelecimentos de todos os tamanhos a melhorar sua eficiência operacional, reduzindo o tempo de espera dos clientes e automatizando processos internos. Através de um portfólio de produtos robustos e escaláveis, garantimos que restaurantes possam oferecer um atendimento ágil, integrado e de alta qualidade.
 
 ---
 
 ## **Descrição do Projeto**
 
-**Enfilei** é um sistema de gerenciamento de fila de atendimento e cadastro de pacientes. Ele foi desenvolvido com foco em clínicas e hospitais que desejam melhorar o fluxo de pacientes e reduzir o tempo de espera, proporcionando uma experiência mais organizada e eficiente. O sistema usa uma arquitetura robusta com **Django REST Framework**, **Celery** e **RabbitMQ** para processar as tarefas de forma assíncrona e garantir que os pacientes sejam atendidos em ordem e sem falhas.
+**Enfilei** é um sistema de gerenciamento de pedidos e organização de filas de espera, desenvolvido especialmente para restaurantes que buscam otimizar seu fluxo de trabalho, aumentar a eficiência e proporcionar uma experiência agradável aos clientes. Usando tecnologias de ponta como Django REST Framework, Celery, RabbitMQ e Redis, o sistema garante a distribuição organizada dos pedidos, o monitoramento em tempo real e a redução do tempo de espera.
 
 ### **Principais Funcionalidades:**
 
-1. **Cadastro de Pacientes**: O sistema permite o cadastro de novos pacientes e identifica se o paciente já possui um registro na clínica por meio do CPF.
+1. **Gestão de Pedidos**: O sistema permite que os pedidos dos clientes sejam feitos digitalmente e processados em uma fila ordenada, priorizando automaticamente pedidos de delivery ou retirada.
    
-2. **Fila de Atendimento**: Pacientes identificados como já cadastrados são automaticamente colocados na fila de atendimento.
+2. **Fila de Espera**: Caso o restaurante esteja cheio, os clientes podem ser colocados em uma fila de espera organizada, com notificações automáticas informando quando a mesa está disponível.
    
-3. **Processamento Assíncrono**: O sistema utiliza **Celery** e **RabbitMQ** para gerenciar as tarefas de forma assíncrona, garantindo que o registro e a fila sejam processados de maneira eficiente.
+3. **Notificações em Tempo Real**: Clientes são notificados automaticamente via SMS ou aplicativo quando o pedido está pronto ou quando uma mesa é liberada.
 
-4. **Reset Diário da Fila**: A fila de atendimento é resetada diariamente, garantindo que cada dia tenha um novo fluxo de pacientes.
+4. **Automação do Inventário**: O sistema atualiza o estoque de ingredientes automaticamente, com base nos pedidos feitos, garantindo uma gestão eficiente dos insumos.
 
 ---
 
@@ -31,22 +31,29 @@ A **Medsis Soluções** foi fundada em 2015 por um grupo de profissionais da ár
 - **Django REST Framework**: Para criar a API que permite interagir com o sistema.
 - **Celery**: Biblioteca de tarefas assíncronas para gerenciamento de fila e execução de tarefas em segundo plano.
 - **RabbitMQ**: Message broker usado para enfileirar e distribuir as tarefas para os workers do Celery.
+- **Redis**: Utilizado como backend opcional para armazenar temporariamente o status dos pedidos e otimizar a velocidade de recuperação de dados.
 
 ---
 
 ## **Como Funciona o Sistema:**
 
-1. **Cadastro/Identificação do Paciente**:
-   - O usuário (funcionário da clínica) insere o CPF do paciente.
-   - O sistema verifica se o paciente já está cadastrado.
-   - Se o paciente não estiver cadastrado, ele é registrado e automaticamente colocado na fila.
+1. **Recebimento e Enfileiramento de Pedidos**:
 
-2. **Adicionando o Paciente à Fila**:
-   - Se o paciente já estiver registrado, ele é adicionado à fila de atendimento por meio de uma tarefa Celery.
-   - RabbitMQ gerencia a fila de mensagens para garantir que as tarefas sejam entregues e processadas corretamente.
+- Quando um cliente faz um pedido via aplicativo ou com o garçom, o pedido é adicionado a uma fila gerenciada por RabbitMQ.
+- Celery distribui as tarefas para diferentes seções do restaurante (cozinha, bar, etc.), processando os pedidos em paralelo, de acordo com a ordem recebida e priorizando quando necessário.
 
-3. **Reset Diário da Fila**:
-   - A fila de pacientes é automaticamente resetada todos os dias, garantindo que o fluxo do dia anterior não interfira no novo dia de atendimento.
+2. **Fila de Espera para Mesas**:
+
+- Se o restaurante estiver cheio, os clientes podem ser colocados em uma fila de espera. O sistema gerencia essa fila e, assim que uma mesa fica disponível, o cliente recebe uma notificação informando que a mesa está pronta.
+- O sistema pode fazer isso automaticamente através de Celery e RabbitMQ para processar as notificações em tempo real.
+
+3. **Notificações Automáticas**:
+
+- O cliente é notificado em diferentes estágios, como quando o pedido está pronto para ser servido ou quando a mesa fica disponível. Essas notificações são enviadas automaticamente via SMS ou através do aplicativo do restaurante.
+
+4. **Automação do Inventário**:
+
+- Cada vez que um pedido é feito, o sistema subtrai automaticamente os ingredientes utilizados do estoque. Se algum insumo atingir um nível crítico, um alerta pode ser enviado ao gerente para reabastecimento.
 
 ---
 
