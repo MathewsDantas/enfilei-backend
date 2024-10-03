@@ -1,0 +1,26 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+
+# Django Media
+media/
+
+# Django Static
+static/
+
+# Django Database
+db.sqlite3
+
+# Django Migrations
+*.py[cod]
+*.egg-info/
+migrations/
+
+# Django Rest Framework
+rest_framework.key
+
+# Virtual Environment
+venv/

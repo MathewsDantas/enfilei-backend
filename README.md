@@ -55,7 +55,7 @@ A **Medsis Soluções** foi fundada em 2015 por um grupo de profissionais da ár
 ### **Pré-requisitos**:
 
 - Python 3.8+
-- Django 4.x
+- Django 5.1.1
 - Celery 5.x
 - RabbitMQ
 - Redis (opcional, pode ser usado como backend para resultados do Celery)
