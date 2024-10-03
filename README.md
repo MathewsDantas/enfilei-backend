@@ -1,10 +1,10 @@
-# **Clinico Queue Manager**
+# **Enfilei**
 
 ### Desenvolvido por **Medsis Soluções**
 
 ---
 
-## **Sobre a Empresa: Medsis Soluçõess**
+## **Sobre a Empresa: Medsis Soluções**
 
 A **Medsis Soluções** foi fundada em 2015 por um grupo de profissionais da área de tecnologia e saúde, com a missão de otimizar o atendimento nas clínicas médicas e hospitais por meio da inovação tecnológica. Nosso foco é reduzir o tempo de espera dos pacientes e melhorar a eficiência dos processos de gestão de atendimento, garantindo uma experiência mais ágil e satisfatória para os usuários. Desde sua fundação, a Medisys Solutions tem se destacado por fornecer soluções robustas e escaláveis, ajudando clínicas a digitalizarem seus processos e melhorarem sua operação.
 
@@ -12,7 +12,7 @@ A **Medsis Soluções** foi fundada em 2015 por um grupo de profissionais da ár
 
 ## **Descrição do Projeto**
 
-**Clinico Queue Manager** é um sistema de gerenciamento de fila de atendimento e cadastro de pacientes. Ele foi desenvolvido com foco em clínicas e hospitais que desejam melhorar o fluxo de pacientes e reduzir o tempo de espera, proporcionando uma experiência mais organizada e eficiente. O sistema usa uma arquitetura robusta com **Django REST Framework**, **Celery** e **RabbitMQ** para processar as tarefas de forma assíncrona e garantir que os pacientes sejam atendidos em ordem e sem falhas.
+**Enfilei** é um sistema de gerenciamento de fila de atendimento e cadastro de pacientes. Ele foi desenvolvido com foco em clínicas e hospitais que desejam melhorar o fluxo de pacientes e reduzir o tempo de espera, proporcionando uma experiência mais organizada e eficiente. O sistema usa uma arquitetura robusta com **Django REST Framework**, **Celery** e **RabbitMQ** para processar as tarefas de forma assíncrona e garantir que os pacientes sejam atendidos em ordem e sem falhas.
 
 ### **Principais Funcionalidades:**
 
@@ -64,7 +64,7 @@ A **Medsis Soluções** foi fundada em 2015 por um grupo de profissionais da ár
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/MathewsDantas/medsis-fila-backend.git
+   git clone https://github.com/MathewsDantas/medsis-enfilei-backend.git
 
 2. Instale as dependências:
    ```bash
