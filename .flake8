@@ -1,0 +1,11 @@
+[flake8]
+# Definir o limite de comprimento de linha (padrão é 79 caracteres)
+max-line-length = 90
+
+# Excluir pastas ou arquivos específicos
+exclude = 
+    migrations,
+    env/,
+    .venv/,
+    __pycache__,
+    node_modules,
