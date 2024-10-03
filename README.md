@@ -71,7 +71,7 @@ A **Chef Soluções** foi fundada em 2020 com o objetivo de trazer inovação pa
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/MathewsDantas/medsis-enfilei-backend.git
+   git clone https://github.com/MathewsDantas/enfilei-backend.git
 
 2. Instale as dependências:
    ```bash
