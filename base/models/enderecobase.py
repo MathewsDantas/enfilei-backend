@@ -52,7 +52,7 @@ class EnderecoBase(models.Model):
             return f"{self.cep[:5]}-{self.cep[5:]}"
 
     class Meta:
-        db_table = "endereco_base"
+        abstract = True
 
     def __str__(self):
         return (
