@@ -5,10 +5,9 @@ from django.contrib.auth.models import Group, Permission
 from usuario.permissions.permission_admin import get_permissoes_admin
 
 from usuario.permissions.permission_gerente import get_permissoes_gerente
-# from usuario.permissions.permission_chefe import get_permissoes_chefe
-# from usuario.permissions.permission_caixa import get_permissoes_caixa
-# from usuario.permissions.permission_cozinheiro import get_permissoes_cozinheiro
-# from usuario.permissions.permission_garcom import get_permissoes_garcom
+from usuario.permissions.permission_caixa import get_permissoes_caixa
+from usuario.permissions.permission_cozinheiro import get_permissoes_cozinheiro
+from usuario.permissions.permission_garcom import get_permissoes_garcom
 from usuario.permissions.permission_terceirizado import get_permissoes_terceirizado
 from usuario.permissions.permission_cliente import get_permissoes_cliente
 
@@ -20,10 +19,9 @@ class Command(BaseCommand):
         grupos_e_permissoes = {
             **get_permissoes_admin(),
             **get_permissoes_gerente(),
-            # get_permissoes_chefe(),
-            # get_permissoes_caixa(),
-            # get_permissoes_cozinheiro(),
-            # get_permissoes_garcom(),
+            **get_permissoes_caixa(),
+            **get_permissoes_cozinheiro(),
+            **get_permissoes_garcom(),
             **get_permissoes_terceirizado(),
             **get_permissoes_cliente(),
         }

@@ -11,7 +11,7 @@ class PermissoesUsuario(Enum):
     EXCLUIR = 'usuario_excluir'
     CADASTRAR = 'usuario_cadastrar'
 
-    @property
+    @classmethod
     def content_type(self):
         return ContentType.objects.get_for_model(Usuario)
 
@@ -20,19 +20,19 @@ def get_permissoes_usuario_admin():
     return [
         {
             "codename": PermissoesUsuario.VER.value,
-            "content_type": PermissoesUsuario.VER.content_type,
+            "content_type": PermissoesUsuario.content_type(),
         },
         {
             "codename": PermissoesUsuario.EDITAR.value,
-            "content_type": PermissoesUsuario.EDITAR.content_type,
+            "content_type": PermissoesUsuario.content_type(),
         },
         {
             "codename": PermissoesUsuario.EXCLUIR.value,
-            "content_type": PermissoesUsuario.EXCLUIR.content_type,
+            "content_type": PermissoesUsuario.content_type(),
         },
         {
             "codename": PermissoesUsuario.CADASTRAR.value,
-            "content_type": PermissoesUsuario.CADASTRAR.content_type,
+            "content_type": PermissoesUsuario.content_type(),
         },
     ]
 
@@ -41,15 +41,15 @@ def get_permissoes_usuario_gerente():
     return [
         {
             "codename": PermissoesUsuario.VER.value,
-            "content_type": PermissoesUsuario.VER.content_type,
+            "content_type": PermissoesUsuario.content_type(),
         },
         {
             "codename": PermissoesUsuario.EDITAR.value,
-            "content_type": PermissoesUsuario.EDITAR.content_type,
+            "content_type": PermissoesUsuario.content_type(),
         },
         {
             "codename": PermissoesUsuario.CADASTRAR.value,
-            "content_type": PermissoesUsuario.CADASTRAR.content_type,
+            "content_type": PermissoesUsuario.content_type(),
         },
     ]
 
@@ -58,10 +58,10 @@ def get_permissoes_usuario_cliente():
     return [
         {
             "codename": PermissoesUsuario.VER.value,
-            "content_type": PermissoesUsuario.VER.content_type,
+            "content_type": PermissoesUsuario.content_type(),
         },
         {
             "codename": PermissoesUsuario.EDITAR.value,
-            "content_type": PermissoesUsuario.EDITAR.content_type,
+            "content_type": PermissoesUsuario.content_type(),
         },
     ]

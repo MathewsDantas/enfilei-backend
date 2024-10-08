@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # meus apps
     "usuario.apps.UsuarioConfig",
     "base.apps.BaseConfig",
+    "pedido.apps.PedidoConfig",
     # apps de terceiros
 ]
 

@@ -32,6 +32,7 @@ class Pessoa(EnderecoBase):
 
     class Meta:
         db_table = "pessoa"
+        default_permissions = [] 
 
     def __str__(self):
         return f"{self.nome} - {self.sobrenome}"

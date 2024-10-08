@@ -71,6 +71,7 @@ class Usuario(AbstractUser):
 
     class Meta:
         db_table = "usuario"
+        default_permissions = [] 
 
     def __str__(self):
         return f"{self.username} - {self.email} - {self.pessoa}"
