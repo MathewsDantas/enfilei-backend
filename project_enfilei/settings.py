@@ -37,16 +37,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     # meus apps
     "usuario.apps.UsuarioConfig",
     "base.apps.BaseConfig",
     "pedido.apps.PedidoConfig",
-
     # apps de terceiros
     "import_export",
     "django_filters",
     "simple_history",
+    "rest_framework_simplejwt",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -134,3 +134,16 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Enfilei API",
+    "DESCRIPTION": "Sistema de gerenciamento de pedidos e organização de filas de espera, desenvolvido especialmente para restaurantes que buscam otimizar seu fluxo de trabalho, aumentar a eficiência e proporcionar uma experiência agradável aos clientes.",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    # OTHER SETTINGS
+}
