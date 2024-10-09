@@ -1,5 +1,5 @@
 from uuid import uuid4
-
+from simple_history.models import HistoricalRecords
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
 
@@ -12,6 +12,8 @@ def upload_to(instance, filename):
 
 
 class Usuario(AbstractUser):
+
+    historico = HistoricalRecords()
 
     email = models.EmailField(
         verbose_name="email",
@@ -71,7 +73,7 @@ class Usuario(AbstractUser):
 
     class Meta:
         db_table = "usuario"
-        default_permissions = [] 
+        default_permissions = []
 
     def __str__(self):
         return f"{self.username} - {self.email} - {self.pessoa}"

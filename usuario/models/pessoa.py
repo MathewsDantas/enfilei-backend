@@ -32,7 +32,7 @@ class Pessoa(EnderecoBase):
 
     class Meta:
         db_table = "pessoa"
-        default_permissions = [] 
+        default_permissions = []  # Serve para não criar permissões automaticamente
 
     def __str__(self):
         return f"{self.nome} - {self.sobrenome}"

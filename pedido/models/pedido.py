@@ -1,9 +1,16 @@
 from django.db import models
-
+from simple_history.models import HistoricalRecords
 from usuario.models.usuario import Usuario
 
 
 class Pedido(models.Model):
+
+    historico = HistoricalRecords()
+
+    status = models.CharField(
+        verbose_name="status",
+        max_length=255,
+    )
 
     data = models.DateField(
         verbose_name="data",
@@ -21,6 +28,13 @@ class Pedido(models.Model):
         on_delete=models.CASCADE,
     )
 
+    interno = models.BooleanField(
+        verbose_name="interno",
+        default=False,
+        null=False,
+        blank=False,
+    )
+
     # Executado antes de salvar o objeto no banco de dados
     def clean(self):
         if self.valor_total < 0:
@@ -28,7 +42,7 @@ class Pedido(models.Model):
 
     class Meta:
         db_table = "pedido"
-        default_permissions = [] 
+        default_permissions = []
         indexes = [
             models.Index(fields=["data"]),
             models.Index(fields=["feito_por"]),
