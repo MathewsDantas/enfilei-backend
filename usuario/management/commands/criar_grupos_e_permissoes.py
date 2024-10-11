@@ -16,6 +16,7 @@ class Command(BaseCommand):
     help = "Cria grupos e permissoes"
 
     def handle(self, *args, **kwargs):
+        self.stdout.write("Criando grupos e permissoes...")
         grupos_e_permissoes = {
             **get_permissoes_admin(),
             **get_permissoes_gerente(),
@@ -37,6 +38,7 @@ class Command(BaseCommand):
                     perm, criado = Permission.objects.get_or_create(
                         codename=permissao["codename"],
                         content_type=permissao["content_type"],
+                        name=permissao["name"],
                     )
                     permissoes_novas.add(perm)
                 # Remover permissoes que nao devem mais estar no grupo
@@ -52,9 +54,14 @@ class Command(BaseCommand):
                     perm, criado = Permission.objects.get_or_create(
                         codename=permissao["codename"],
                         content_type=permissao["content_type"],
+                        name=permissao["name"],
                     )
 
                     grupo.permissions.add(perm)
                     print(f"Permissao {permissao} adicionada ao grupo {grupo}")
                 except Permission.DoesNotExist:
                     print(f"Permissao {permissao} nao encontrada")
+
+        self.stdout.write(
+            "Grupos e permissoes criados com sucesso!", style_func=self.style.SUCCESS
+        )
