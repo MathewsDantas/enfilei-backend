@@ -2,7 +2,7 @@ from django.db import models
 
 
 from base.models.bairroBase import BairroBase
-from base.models.cidadeBase import CidadeBase
+from base.models.municipioBase import MunicipioBase
 from base.models.estadoBase import EstadoBase
 
 
@@ -35,9 +35,9 @@ class EnderecoBase(models.Model):
         on_delete=models.PROTECT,
     )
 
-    cidade = models.ForeignKey(
-        verbose_name="cidade",
-        to=CidadeBase,
+    municipio = models.ForeignKey(
+        verbose_name="municipio",
+        to=MunicipioBase,
         on_delete=models.PROTECT,
     )
 

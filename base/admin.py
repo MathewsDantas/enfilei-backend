@@ -1,16 +1,16 @@
 from django.contrib import admin
 
 
-from .models import BairroBase, CidadeBase, EstadoBase
+from .models import BairroBase, MunicipioBase, EstadoBase
 
 
 @admin.register(BairroBase)
 class BairroBaseAdmin(admin.ModelAdmin):
-    list_display = ["id", "descricao", "cidade"]
-    search_fields = ["descricao", "cidade"]
+    list_display = ["id", "descricao", "municipio"]
+    search_fields = ["descricao", "municipio"]
 
 
-@admin.register(CidadeBase)
+@admin.register(MunicipioBase)
 class CidadeBaseAdmin(admin.ModelAdmin):
     list_display = ["id", "descricao", "estado"]
     search_fields = ["descricao", "estado"]

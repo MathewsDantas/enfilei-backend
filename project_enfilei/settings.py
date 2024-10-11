@@ -142,7 +142,10 @@ REST_FRAMEWORK = {
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Enfilei API",
-    "DESCRIPTION": "Sistema de gerenciamento de pedidos e organização de filas de espera, desenvolvido especialmente para restaurantes que buscam otimizar seu fluxo de trabalho, aumentar a eficiência e proporcionar uma experiência agradável aos clientes.",
+    "DESCRIPTION": "Sistema de gerenciamento de pedidos e organização de filas de espera,"
+    "desenvolvido especialmente para restaurantes que buscam otimizar seu fluxo de"
+    "trabalho, aumentar a eficiência e proporcionar uma experiência agradável"
+    "aos clientes.",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
     # OTHER SETTINGS

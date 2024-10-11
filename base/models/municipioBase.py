@@ -3,15 +3,10 @@ from django.db import models
 from base.models.estadoBase import EstadoBase
 
 
-class CidadeBase(models.Model):
+class MunicipioBase(models.Model):
     descricao = models.CharField(
         verbose_name="descricao",
         max_length=255,
-    )
-
-    codigo_ibge = models.CharField(
-        verbose_name="codigoibge",
-        max_length=10,
     )
 
     estado = models.ForeignKey(
@@ -21,7 +16,7 @@ class CidadeBase(models.Model):
     )
 
     class Meta:
-        db_table = "cidade_base"
+        db_table = "municipio_base"
 
     def __str__(self):
-        return f"{self.descricao} - {self.codigo_ibge} - {self.estado}"
+        return f"{self.descricao} - {self.estado}"
