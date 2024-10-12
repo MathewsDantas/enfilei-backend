@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  enfilei-api:
+    build:
+      context: . # Indica o diretório onde está o Dockerfile
+      dockerfile: ./Dockerfile # Indica o nome do arquivo Dockerfile
+    container_name: enfilei-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app # Mapeado o diretório atual para o diretório /app do container faz com que qualquer alteração feita no código seja refletida no container, 
+                # se não fizer isso, será necessário recriar o container toda vez que houver uma alteração no código
+    command: >
+      sh -c "
+        python manage.py makemigrations && 
+        python manage.py migrate &&
+        python manage.py seed_all &&
+        python manage.py runserver 0.0.0.0:8000
+      "
+    # env_file:
+    #   - fileName.env
