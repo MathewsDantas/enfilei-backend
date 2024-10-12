@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -150,3 +151,15 @@ SPECTACULAR_SETTINGS = {
     "SERVE_INCLUDE_SCHEMA": False,
     # OTHER SETTINGS
 }
+
+SIMPLE_JWT = {
+    "ACCESS": "rest_framework_simplejwt.tokens.AccessToken",
+    "TOKEN_OBTAIN_SERIALIZER": "usuario.serializers.MyTokenObtainPairSerializer",  # noqa
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,  # Blacklist old refresh tokens after rotation
+    "UPDATE_LAST_LOGIN": False,
+}
+
+# DATE_FORMAT = "%d/%m/%Y"
+AUTH_USER_MODEL = "usuario.Usuario"

@@ -1,19 +1,44 @@
 from uuid import uuid4
 from simple_history.models import HistoricalRecords
-from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
+from django.contrib.auth.models import (
+    BaseUserManager,
+    AbstractBaseUser,
+    PermissionsMixin,
+)
+from django.utils import timezone
 
 from usuario.models.pessoa import Pessoa
 
 
 def upload_to(instance, filename):
     uuid = str(uuid4()).replace("-", "")
-    return f"avatar/{instance.username}/{uuid}.{filename}"
+    return f"avatar/{instance.email}/{uuid}.{filename}"
 
 
-class Usuario(AbstractUser):
+class UsuarioManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError("O email é obrigatório")
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault("is_staff", True)  # se não existir, cria
+        extra_fields.setdefault("is_superuser", True)
+        return self.create_user(email, password, **extra_fields)
+
+    def get_by_natural_key(self, email):  # Basicamente ele pega o email e faz a busca
+        return self.get(email=email)
+
+
+class Usuario(AbstractBaseUser, PermissionsMixin):
 
     historico = HistoricalRecords()
+    objects = UsuarioManager()
 
     email = models.EmailField(
         verbose_name="email",
@@ -50,18 +75,14 @@ class Usuario(AbstractUser):
         blank=True,
     )
 
-    groups = models.ManyToManyField(
-        verbose_name="groups",
-        to=Group,
-        related_name="usuario_usuario",
-        blank=True,
+    date_joined = models.DateTimeField(default=timezone.now)
+
+    is_active = models.BooleanField(
+        default=True,
     )
 
-    user_permissions = models.ManyToManyField(
-        verbose_name="userPermissions",
-        to=Permission,
-        related_name="usuario_permissions",
-        blank=True,
+    is_staff = models.BooleanField(
+        default=False,
     )
 
     def get_avatar(self):
@@ -69,11 +90,11 @@ class Usuario(AbstractUser):
             return self.avatar_img.url
         return None
 
-    USERNAME_FIELD = "email"
+    USERNAME_FIELD = "email"  # campo que sera usado para fazer login
 
     class Meta:
         db_table = "usuario"
         default_permissions = []
 
     def __str__(self):
-        return f"{self.username} - {self.email} - {self.pessoa}"
+        return f"{self.email} - {self.pessoa}"
