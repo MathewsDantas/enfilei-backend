@@ -18,5 +18,7 @@ services:
         python manage.py seed_all &&
         python manage.py runserver 0.0.0.0:8000
       "
+    environment:
+      - PYTHONPATH=/app
     # env_file:
     #   - fileName.env
