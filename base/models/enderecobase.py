@@ -33,18 +33,24 @@ class EnderecoBase(models.Model):
         verbose_name="bairro",
         to=BairroBase,
         on_delete=models.PROTECT,
+        null=True,
+        blank=True,
     )
 
     municipio = models.ForeignKey(
         verbose_name="municipio",
         to=MunicipioBase,
         on_delete=models.PROTECT,
+        null=True,
+        blank=True,
     )
 
     estado = models.ForeignKey(
         verbose_name="estado",
         to=EstadoBase,
         on_delete=models.PROTECT,
+        null=True,
+        blank=True,
     )
 
     def cep_formatado(self):

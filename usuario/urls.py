@@ -1,8 +1,13 @@
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenRefreshView
+from rest_framework.routers import DefaultRouter
 from drf_spectacular.utils import extend_schema, extend_schema_view
 
-from usuario.views import MyTokenObtainPairView
+from usuario.views import MyTokenObtainPairView, UsuarioView
+
+router = DefaultRouter()
+
+router.register("usuario", UsuarioView, basename="usuario")
 
 auth_urls = [
     path(
@@ -29,4 +34,5 @@ auth_urls = [
 
 usuario_urls = [
     path("auth/", include(auth_urls)),
+    path("", include(router.urls)),
 ]

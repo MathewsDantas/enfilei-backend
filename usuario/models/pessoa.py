@@ -2,11 +2,17 @@ from django.db import models
 
 
 from base.models.enderecobase import EnderecoBase
+from base.utils import validate_documentos
 
 
 class Pessoa(EnderecoBase):
-    nome = models.CharField(
+    nome_completo = models.CharField(
         verbose_name="nome",
+        max_length=255,
+    )
+
+    primeiro_nome = models.CharField(
+        verbose_name="primeiro_nome",
         max_length=255,
     )
 
@@ -18,7 +24,10 @@ class Pessoa(EnderecoBase):
     cpf = models.CharField(
         verbose_name="cpf",
         unique=True,
-        max_length=11,
+        max_length=14,
+        validators=[
+            validate_documentos.validate_cpf,
+        ],
     )
 
     data_nacimento = models.DateField(
@@ -35,4 +44,4 @@ class Pessoa(EnderecoBase):
         default_permissions = []  # Serve para não criar permissões automaticamente
 
     def __str__(self):
-        return f"{self.nome} - {self.sobrenome}"
+        return f"{self.nome_completo} - {self.sobrenome}"

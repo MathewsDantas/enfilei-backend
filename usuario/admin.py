@@ -21,5 +21,5 @@ class UsuarioAdmin(ImportExportModelAdmin):
 
 @admin.register(Pessoa)
 class PessoaAdmin(admin.ModelAdmin):
-    list_display = ["id", "nome", "sobrenome", "telefone"]
-    search_fields = ["nome", "telefone"]
+    list_display = ["id", "nome_completo", "sobrenome", "telefone"]
+    search_fields = ["nome_completo", "telefone"]

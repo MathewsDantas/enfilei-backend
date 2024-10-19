@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "usuario.apps.UsuarioConfig",
     "base.apps.BaseConfig",
     "pedido.apps.PedidoConfig",
+    "solicitacao.apps.SolicitacaoConfig",
     # apps de terceiros
     "import_export",
     "django_filters",
@@ -117,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "pt-br"
 
 TIME_ZONE = "UTC"
 
