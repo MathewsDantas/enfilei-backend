@@ -7,7 +7,7 @@ from usuario.views import MyTokenObtainPairView, UsuarioView
 
 router = DefaultRouter()
 
-router.register("usuario", UsuarioView, basename="usuario")
+router.register("", UsuarioView, basename="usuario")
 
 auth_urls = [
     path(

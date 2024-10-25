@@ -8,10 +8,12 @@ from drf_spectacular.views import (
 
 
 from usuario.urls import usuario_urls
+from solicitacao.urls import solicitacoes_urls
 
 api_urls = [
     # path("base/", include("base.urls")),
     path("usuario/", include(usuario_urls)),
+    path("solicitacao/", include(solicitacoes_urls)),
 ]
 
 outras_urls = [

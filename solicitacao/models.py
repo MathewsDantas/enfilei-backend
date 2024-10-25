@@ -1,18 +1,21 @@
 from django.db import models
 
 
-from .constants import TipoSolicitacao
+from .constants import TipoSolicitacao, StatusSolicitacao
 
 
 class Solicitacao(models.Model):
     tipo = models.CharField(
         verbose_name="tipo",
         max_length=255,
-        choices=[(tag.name, tag.value) for tag in TipoSolicitacao],
+        choices=[(tag.value, tag.name) for tag in TipoSolicitacao],
     )
 
-    data_expiracao = models.DateTimeField(
-        verbose_name="data_expiracao",
+    status = models.CharField(
+        verbose_name="status",
+        max_length=255,
+        default=StatusSolicitacao.EM_ANALISE.value,
+        choices=[(tag.value, tag.name) for tag in StatusSolicitacao],
     )
 
     json = models.JSONField(
@@ -25,4 +28,4 @@ class Solicitacao(models.Model):
         default_permissions = []
 
     def __str__(self):
-        return f"{self.tipo} - {self.data_expiracao}"
+        return f"{self.tipo} - {self.status} - {self.data_expiracao}"

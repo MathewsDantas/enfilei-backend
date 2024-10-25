@@ -2,6 +2,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from drf_spectacular.utils import extend_schema
 
 
 from usuario.serializers import MyTokenObtainPairSerializer
@@ -13,6 +14,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
+@extend_schema(tags=["usuario"])
 class UsuarioView(viewsets.ModelViewSet):
     queryset = Usuario.objects.all()
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]

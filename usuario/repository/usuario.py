@@ -25,3 +25,6 @@ class UsuarioRepository:
 
     def get_by_id(self, id, active=True):
         return Usuario.objects.get(id=id, is_active=active)
+
+    def filter(self, **kwargs):
+        return Usuario.objects.filter(**kwargs)
