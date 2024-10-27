@@ -28,4 +28,4 @@ class Solicitacao(models.Model):
         default_permissions = []
 
     def __str__(self):
-        return f"{self.tipo} - {self.status} - {self.data_expiracao}"
+        return f"{self.tipo} - {self.status}"

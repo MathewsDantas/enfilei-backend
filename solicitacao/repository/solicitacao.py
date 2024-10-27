@@ -7,7 +7,7 @@ class SolicitacaoRepository:
         tipo: str,
         json: dict,
         status: str = None,
-    ):
+    ) -> Solicitacao:
         data = {
             "tipo": tipo,
             "json": json,

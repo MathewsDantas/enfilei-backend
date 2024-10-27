@@ -13,9 +13,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 
+import os
+import environ
+
+env = environ.Env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -24,9 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-@a#weif$7_qv=j%w$yqe9bz8yu#-=+*b2z4ty8)rvnyzw40f(h"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DEBUG", default=True)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.100']
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*"])
 
 
 # Application definition
@@ -153,11 +157,26 @@ SPECTACULAR_SETTINGS = {
     # OTHER SETTINGS
 }
 
+# Email settings
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_HOST = env.str("EMAIL_HOST")
+EMAIL_PORT = env.str("EMAIL_PORT")
+EMAIL_HOST_USER = env.str("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+
+FRONT_URL = env.str("FRONT_URL")
+
 SIMPLE_JWT = {
     "ACCESS": "rest_framework_simplejwt.tokens.AccessToken",
     "TOKEN_OBTAIN_SERIALIZER": "usuario.serializers.MyTokenObtainPairSerializer",  # noqa
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
-    "ROTATE_REFRESH_TOKENS": True,
+    "REFRESH_TOKEN_LIFETIME": timedelta(
+        days=env.int("REFRESH TOKEN LIFETIME DAYS", default=1)
+    ),
+    "ROTATE_REFRESH_TOKENS": env.bool("ROTATE_REFRESH_TOKENS", default=False),
     "BLACKLIST_AFTER_ROTATION": True,  # Blacklist old refresh tokens after rotation
     "UPDATE_LAST_LOGIN": False,
 }

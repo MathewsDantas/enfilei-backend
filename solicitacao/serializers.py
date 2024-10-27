@@ -7,6 +7,7 @@ from usuario.constants import TipoUsuario
 from usuario.repository import UsuarioRepository
 from solicitacao.models import Solicitacao
 from solicitacao.constants import TipoSolicitacao, StatusSolicitacao
+from solicitacao.cases import SolicitacaoCase
 from solicitacao.repository import SolicitacaoRepository
 
 
@@ -60,8 +61,8 @@ class SolicitacaoCreateConviteSerializer(serializers.ModelSerializer):
 
     @transaction.atomic
     def create(self, validated_data):
-        solicitacao_repository = SolicitacaoRepository()
-        solicitacao_repository.create(
+        solicitacao_case = SolicitacaoCase()
+        solicitacao_case.criar_solicitacao(
             tipo=TipoSolicitacao.CONVITE_USUARIO.value,
             json={
                 "email": validated_data["email"],
