@@ -2,7 +2,7 @@ import requests
 from django.core.management.base import BaseCommand
 from django.db import transaction
 
-from base.models import EstadoBase, MunicipioBase, BairroBase
+from base.models import BaseEstado, BaseMunicipio, BaseBairro
 
 # #Municipio
 # {
@@ -42,7 +42,7 @@ class Command(BaseCommand):
             "https://servicodados.ibge.gov.br/api/v1/localidades/estados"
         )
         for estado in estados:
-            EstadoBase.objects.get_or_create(
+            BaseEstado.objects.get_or_create(
                 id=estado["id"],
                 defaults={
                     "descricao": estado["nome"],
@@ -56,11 +56,11 @@ class Command(BaseCommand):
             "https://servicodados.ibge.gov.br/api/v1/localidades/municipios"
         )
         for municipio in municipios:
-            MunicipioBase.objects.get_or_create(
+            BaseMunicipio.objects.get_or_create(
                 id=municipio["id"],
                 defaults={
                     "descricao": municipio["nome"],
-                    "estado": EstadoBase.objects.get(
+                    "estado": BaseEstado.objects.get(
                         id=municipio["microrregiao"]["mesorregiao"]["UF"]["id"]
                     ),  # noqa
                 },
@@ -72,11 +72,11 @@ class Command(BaseCommand):
             "https://servicodados.ibge.gov.br/api/v1/localidades/distritos"
         )
         for bairro in bairros:
-            estado = EstadoBase.objects.get(
+            estado = BaseEstado.objects.get(
                 id=bairro["municipio"]["microrregiao"]["mesorregiao"]["UF"]["id"]
             )
-            municipio = MunicipioBase.objects.get(id=bairro["municipio"]["id"])
-            BairroBase.objects.get_or_create(
+            municipio = BaseMunicipio.objects.get(id=bairro["municipio"]["id"])
+            BaseBairro.objects.get_or_create(
                 id=bairro["id"],
                 defaults={
                     "descricao": bairro["nome"],

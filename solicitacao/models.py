@@ -2,9 +2,10 @@ from django.db import models
 
 
 from .constants import TipoSolicitacao, StatusSolicitacao
+from base.models.base_model import BaseModel
 
 
-class Solicitacao(models.Model):
+class Solicitacao(BaseModel):
     tipo = models.CharField(
         verbose_name="tipo",
         max_length=255,

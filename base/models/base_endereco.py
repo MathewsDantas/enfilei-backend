@@ -1,12 +1,12 @@
 from django.db import models
 
+from base.models.base_bairro import BaseBairro
+from base.models.base_municipio import BaseMunicipio
+from base.models.base_estado import BaseEstado
+from base.models.base_model import BaseModel
 
-from base.models.bairroBase import BairroBase
-from base.models.municipioBase import MunicipioBase
-from base.models.estadoBase import EstadoBase
 
-
-class EnderecoBase(models.Model):
+class BaseEndereco(BaseModel):
     cep = models.CharField(
         verbose_name="cep",
         max_length=9,
@@ -31,7 +31,7 @@ class EnderecoBase(models.Model):
 
     bairro = models.ForeignKey(
         verbose_name="bairro",
-        to=BairroBase,
+        to=BaseBairro,
         on_delete=models.PROTECT,
         null=True,
         blank=True,
@@ -39,7 +39,7 @@ class EnderecoBase(models.Model):
 
     municipio = models.ForeignKey(
         verbose_name="municipio",
-        to=MunicipioBase,
+        to=BaseMunicipio,
         on_delete=models.PROTECT,
         null=True,
         blank=True,
@@ -47,7 +47,7 @@ class EnderecoBase(models.Model):
 
     estado = models.ForeignKey(
         verbose_name="estado",
-        to=EstadoBase,
+        to=BaseEstado,
         on_delete=models.PROTECT,
         null=True,
         blank=True,
@@ -63,6 +63,6 @@ class EnderecoBase(models.Model):
     def __str__(self):
         return (
             f"{self.cep} - {self.logradouro} - {self.numero} - "
-            f"{self.complemento} - {self.bairro} - {self.cidade} - "
+            f"{self.complemento} - {self.bairro} - "
             f"{self.estado}"
         )

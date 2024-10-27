@@ -1,6 +1,6 @@
-from .bairroBase import BairroBase
-from .municipioBase import MunicipioBase
-from .estadoBase import EstadoBase
-from .enderecobase import EnderecoBase
+from .base_bairro import BaseBairro
+from .base_municipio import BaseMunicipio
+from .base_estado import BaseEstado
+from .base_endereco import BaseEndereco
 
-__all__ = ["BairroBase", "MunicipioBase", "EstadoBase", "EnderecoBase"]
+__all__ = ["BaseBairro", "BaseMunicipio", "BaseEstado", "BaseEndereco"]

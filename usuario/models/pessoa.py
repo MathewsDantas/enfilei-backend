@@ -1,11 +1,11 @@
 from django.db import models
 
 
-from base.models.enderecobase import EnderecoBase
+from base.models.base_endereco import BaseEndereco
 from base.utils import validate_documentos
 
 
-class Pessoa(EnderecoBase):
+class Pessoa(BaseEndereco):
     nome_completo = models.CharField(
         verbose_name="nome",
         max_length=255,

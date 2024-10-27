@@ -1,11 +1,11 @@
 from django.db import models
-from simple_history.models import HistoricalRecords
+
+
 from usuario.models.usuario import Usuario
+from base.models.base_model import BaseModel
 
 
-class Pedido(models.Model):
-
-    historico = HistoricalRecords()
+class Pedido(BaseModel):
 
     status = models.CharField(
         verbose_name="status",

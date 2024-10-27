@@ -1,10 +1,10 @@
 from django.db import models
 
-from base.models.municipioBase import MunicipioBase
-from base.models.estadoBase import EstadoBase
+from base.models.base_municipio import BaseMunicipio
+from base.models.base_estado import BaseEstado
 
 
-class BairroBase(models.Model):
+class BaseBairro(models.Model):
     descricao = models.CharField(
         verbose_name="descricao",
         max_length=255,
@@ -12,18 +12,18 @@ class BairroBase(models.Model):
 
     municipio = models.ForeignKey(
         verbose_name="municipio",
-        to=MunicipioBase,
+        to=BaseMunicipio,
         on_delete=models.CASCADE,
     )
 
     estado = models.ForeignKey(
         verbose_name="estado",
-        to=EstadoBase,
+        to=BaseEstado,
         on_delete=models.CASCADE,
     )
 
     class Meta:
-        db_table = "bairro_base"
+        db_table = "base_bairro"
 
     def __str__(self):
         return f"{self.descricao} - {self.municipio}"

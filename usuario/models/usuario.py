@@ -1,5 +1,4 @@
 from uuid import uuid4
-from simple_history.models import HistoricalRecords
 from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager,
@@ -9,6 +8,7 @@ from django.contrib.auth.models import (
 from django.utils import timezone
 
 from usuario.models.pessoa import Pessoa
+from base.models.base_model import BaseModel
 
 
 def upload_to(instance, filename):
@@ -35,9 +35,8 @@ class UsuarioManager(BaseUserManager):
         return self.get(email=email)
 
 
-class Usuario(AbstractBaseUser, PermissionsMixin):
+class Usuario(AbstractBaseUser, PermissionsMixin, BaseModel):
 
-    historico = HistoricalRecords()
     objects = UsuarioManager()
 
     email = models.EmailField(
