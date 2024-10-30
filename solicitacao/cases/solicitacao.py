@@ -19,7 +19,7 @@ class SolicitacaoCase:
 
         url = self.gerar_url_solicitacao(solicitacao.id)
         send_mail(
-            subject="Convite para cadastro",
+            subject="Enfilei - Convite para cadastro",
             message=f"Olá, você foi convidado para se cadastrar no Enfilei, clique no link para se cadastrar: {url}",  # noqa
             from_email=self.from_email,
             recipient_list=[json["email"]],

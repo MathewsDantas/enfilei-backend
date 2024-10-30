@@ -1,4 +1,8 @@
 from .auth import MyTokenObtainPairSerializer
-from .usuario import UsuarioCreateSerializer
+from .usuario import UsuarioCreateSerializer, UsuarioListSerializer
 
-__all__ = ["MyTokenObtainPairSerializer", "UsuarioCreateSerializer"]
+__all__ = [
+    "MyTokenObtainPairSerializer",
+    "UsuarioCreateSerializer",
+    "UsuarioListSerializer",
+]

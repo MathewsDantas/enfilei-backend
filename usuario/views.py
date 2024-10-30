@@ -7,7 +7,7 @@ from drf_spectacular.utils import extend_schema
 
 from usuario.serializers import MyTokenObtainPairSerializer
 from usuario.models import Usuario
-from usuario.serializers import UsuarioCreateSerializer
+from usuario.serializers import UsuarioCreateSerializer, UsuarioListSerializer
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -16,6 +16,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 @extend_schema(tags=["usuario"])
 class UsuarioView(viewsets.ModelViewSet):
+    http_method_names = ["get", "post", "patch", "delete"]
     queryset = Usuario.objects.all()
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
 
@@ -25,9 +26,9 @@ class UsuarioView(viewsets.ModelViewSet):
         return super().check_permissions(request)
 
     def get_queryset(self):
-        return super().get_queryset().filter(is_active=True)
+        return super().get_queryset().filter()
 
     def get_serializer_class(self):
         if self.action == "create":
             return UsuarioCreateSerializer
-        return UsuarioCreateSerializer
+        return UsuarioListSerializer

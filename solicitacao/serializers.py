@@ -27,26 +27,26 @@ class SolicitacaoCreateConviteSerializer(serializers.ModelSerializer):
         validate_cpf(cpf)
 
         if usuario_repository.filter(pessoa__cpf=cpf).exists():
-            raise serializers.ValidationError("CPF já cadastrado")
+            raise serializers.ValidationError({"cpf": "CPF já cadastrado"})
 
         if usuario_repository.filter(email=email).exists():
-            raise serializers.ValidationError("Email já cadastrado")
+            raise serializers.ValidationError({"email": "Email já cadastrado"})
 
         if grupo not in TipoUsuario.names():
-            raise serializers.ValidationError("Grupo inválido")
+            raise serializers.ValidationError({"grupo": "Grupo inválido"})
 
         if solicitacao_repository.filter(
             json__email=email, status=StatusSolicitacao.EM_ANALISE.value
         ).exists():
             raise serializers.ValidationError(
-                "Já existe uma solicitação em análise para esse email"
+                {"email": "Já existe uma solicitação em análise para esse email"}
             )
 
         if solicitacao_repository.filter(
             json__cpf=cpf, status=StatusSolicitacao.EM_ANALISE.value
         ).exists():
             raise serializers.ValidationError(
-                "Já existe uma solicitação em análise para esse CPF"
+                {"cpf": "Já existe uma solicitação em análise para esse cpf"}
             )
 
         return data

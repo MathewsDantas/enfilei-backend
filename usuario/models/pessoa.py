@@ -7,7 +7,7 @@ from base.utils import validate_documentos
 
 class Pessoa(BaseEndereco):
     nome_completo = models.CharField(
-        verbose_name="nome",
+        verbose_name="nome_completo",
         max_length=255,
     )
 

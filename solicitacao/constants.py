@@ -2,8 +2,8 @@ from enum import Enum
 
 
 class TipoSolicitacao(Enum):
-    FAZER_PEDIDO = "fazer_pedido"
-    CONVITE_USUARIO = "convite_usuario"
+    FAZER_PEDIDO = "Fazer pedido"
+    CONVITE_USUARIO = "Convite de usuário"
 
     @classmethod
     def values(self):
@@ -11,9 +11,9 @@ class TipoSolicitacao(Enum):
 
 
 class StatusSolicitacao(Enum):
-    CANCELADO = "cancelado"
-    FINALIZADO = "finalizado"
-    EM_ANALISE = "em_analise"
+    CANCELADO = "Cancelado"
+    FINALIZADO = "Finalizado"
+    EM_ANALISE = "Em análise"
 
     @classmethod
     def values(self):

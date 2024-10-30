@@ -7,11 +7,13 @@ class UsuarioRepository:
         email: str,
         password: str,
         pessoa: Pessoa,
+        is_active: bool = True,
     ):
         return Usuario.objects.create_user(  # Do manager
             email=email,
             password=password,
             pessoa=pessoa,
+            is_active=is_active,
         )
 
     def update(self, usuario):
