@@ -101,3 +101,34 @@ class UsuarioListSerializer(serializers.ModelSerializer):
 
     def get_nome_completo(self, obj):
         return obj.pessoa.nome_completo if obj.pessoa else None
+
+
+class UsuarioUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usuario
+        fields = [
+            "email",
+            "password",
+            "is_active",
+        ]
+
+    def validate(self, data):
+        email = data.get("email")
+
+        if Usuario.objects.filter(email=email).exists():
+            raise serializers.ValidationError({"email": "Email já cadastrado"})
+
+        return data
+
+    @transaction.atomic
+    def update(self, instance, validated_data):
+        instance.email = validated_data.get("email", instance.email)
+        instance.password = validated_data.get("password", instance.password)
+        instance.is_active = validated_data.get("is_active", instance.is_active)
+        instance.save()
+
+        return instance
+
+    def to_representation(self, instance):
+
+        return UsuarioListSerializer(instance).to_representation(instance)

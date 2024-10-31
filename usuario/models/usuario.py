@@ -84,6 +84,11 @@ class Usuario(AbstractBaseUser, PermissionsMixin, BaseModel):
         default=False,
     )
 
+    @property
+    def get_grupos(self):
+        return self.groups.all()
+
+    @property
     def get_avatar(self):
         if self.avatar_img:
             return self.avatar_img.url

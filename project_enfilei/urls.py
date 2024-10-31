@@ -12,7 +12,7 @@ from solicitacao.urls import solicitacoes_urls
 
 api_urls = [
     # path("base/", include("base.urls")),
-    path("usuario/", include(usuario_urls)),
+    path("", include(usuario_urls)),
     path("solicitacao/", include(solicitacoes_urls)),
 ]
 

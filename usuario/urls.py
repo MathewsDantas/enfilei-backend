@@ -3,11 +3,12 @@ from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework.routers import DefaultRouter
 from drf_spectacular.utils import extend_schema, extend_schema_view
 
-from usuario.views import MyTokenObtainPairView, UsuarioView
+from usuario.views import MyTokenObtainPairView, UsuarioView, PessoaView
 
 router = DefaultRouter()
 
-router.register("", UsuarioView, basename="usuario")
+router.register("usuario", UsuarioView, basename="usuario")
+router.register("pessoa", PessoaView, basename="pessoa")
 
 auth_urls = [
     path(

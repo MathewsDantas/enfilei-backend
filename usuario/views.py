@@ -6,8 +6,13 @@ from drf_spectacular.utils import extend_schema
 
 
 from usuario.serializers import MyTokenObtainPairSerializer
-from usuario.models import Usuario
-from usuario.serializers import UsuarioCreateSerializer, UsuarioListSerializer
+from usuario.models import Usuario, Pessoa
+from usuario.serializers import (
+    UsuarioCreateSerializer,
+    UsuarioListSerializer,
+    UsuarioUpdateSerializer,
+    PessoaListSerializer,
+)
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -31,4 +36,14 @@ class UsuarioView(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action == "create":
             return UsuarioCreateSerializer
+        elif self.action == "partial_update":
+            return UsuarioUpdateSerializer
         return UsuarioListSerializer
+
+
+@extend_schema(tags=["pessoa"])
+class PessoaView(viewsets.ModelViewSet):
+    http_method_names = ["get"]
+    queryset = Pessoa.objects.all()
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    serializer_class = PessoaListSerializer
