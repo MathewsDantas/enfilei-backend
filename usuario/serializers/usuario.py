@@ -123,8 +123,12 @@ class UsuarioUpdateSerializer(serializers.ModelSerializer):
     @transaction.atomic
     def update(self, instance, validated_data):
         instance.email = validated_data.get("email", instance.email)
-        instance.password = validated_data.get("password", instance.password)
         instance.is_active = validated_data.get("is_active", instance.is_active)
+
+        password = validated_data.get("password", instance.password)
+        if password:
+            instance.set_password(password)
+
         instance.save()
 
         return instance

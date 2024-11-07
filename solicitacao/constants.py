@@ -4,6 +4,7 @@ from enum import Enum
 class TipoSolicitacao(Enum):
     FAZER_PEDIDO = "Fazer pedido"
     CONVITE_USUARIO = "Convite de usuário"
+    RESETAR_SENHA = "Resetar senha"
 
     @classmethod
     def values(self):

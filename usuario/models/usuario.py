@@ -52,13 +52,6 @@ class Usuario(AbstractBaseUser, PermissionsMixin, BaseModel):
         blank=False,
     )
 
-    verificado = models.BooleanField(
-        verbose_name="verificado",
-        default=False,
-        null=False,
-        blank=False,
-    )
-
     avatar_img = models.ImageField(
         verbose_name="avatarImg",
         upload_to=upload_to,
